@@ -8,6 +8,8 @@ module.exports = {
 				'WELCOME_REPROMPT' : 'For match information say, when is the next %s game, or, for ranking information ask what are\
 				 the league standings.',
 
+				'SIZE_PROMPT' : 'What size of flower would you like? Small, Medium, or Large?',
+
 				'HELP_MSG' : 'To play the game I will ask you if it is for a boy or girl, then what size of flower you would like, from there \
         the game will begin.',
 
@@ -22,6 +24,8 @@ module.exports = {
 
 				'WELCOME_REPROMPT' : 'For match information say, when is the next %s game, or, for ranking information ask what are\
 				 the league standings.',
+
+				'SIZE_PROMPT' : 'What size of flower would you like? Small, Medium, or Large?',
 
 				'HELP_MSG' : 'To play the game I will ask you if it is for a boy or girl, then what size of flower you would like, from there \
         the game will begin.',

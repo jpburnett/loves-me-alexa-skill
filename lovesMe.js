@@ -10,8 +10,8 @@ var LovesMeNotCounter = 1;  //counter to determine how many times to print the p
 
 var loveArray = []; //Array that will get filled with the phrases to speak
 
-var phraseA = "Loves Me"
-var phraseB = "Loves Me Not"
+var phraseA = 'Loves Me'
+var phraseB = 'Loves Me Not'
 
 //////////////////////////////////////////////////////////////////////////////
 // Intent implementation functions
@@ -40,7 +40,8 @@ function makeFlower(flowerSize){
     loveArray[LovesMeNotCounter] = phraseB;
     LovesMeNotCounter += 2;
   }
-  return loveArray; //Return the filled array.
+  var theLoveArray = loveArray.toString();
+  return theLoveArray; //Return the filled array.
 }
 
 //Small flower test
@@ -66,3 +67,6 @@ makeFlower(lgFlower);
 console.log("The first value of the array is: " + loveArray[0]);
 console.log("Size of the array:", loveArray.length);
 console.log("The full array is:", loveArray.toString(), '\n')
+
+var flowerSize = Math.floor(Math.random() * ((9 - 1) + 1) + 1);
+console.log(flowerSize);
