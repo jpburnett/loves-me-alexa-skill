@@ -5,13 +5,11 @@ module.exports = {
 				'SKILL_NAME' : 'Loves me',
 				'WELCOME_MSG' : 'Welcome to Loves me.',
 
-				'WELCOME_REPROMPT' : 'For match information say, when is the next %s game, or, for ranking information ask what are\
-				 the league standings.',
+				'WELCOME_REPROMPT' : 'Welcome to loves me, lets play to see if your admirer loves you, or loves you not.',
 
 				'SIZE_PROMPT' : 'What size of flower would you like? Small, Medium, or Large?',
 
-				'HELP_MSG' : 'To play the game I will ask you if it is for a boy or girl, then what size of flower you would like, from there \
-        the game will begin.',
+				'HELP_MSG' : 'To play the game ask me if he or she loves me.',
 
 				'SIMPLE_REPROMPT' : "Would you like to play?",
 				'SHUTDOWN_MSG' : 'Thank you for playing.'
@@ -22,13 +20,11 @@ module.exports = {
 				'SKILL_NAME' : 'Loves Me',
 				'WELCOME_MSG' : 'Welcome to Loves me ',
 
-				'WELCOME_REPROMPT' : 'For match information say, when is the next %s game, or, for ranking information ask what are\
-				 the league standings.',
+				'WELCOME_REPROMPT' : 'Welcome to loves me, lets play to see if your admirer loves you, or loves you not.',
 
 				'SIZE_PROMPT' : 'What size of flower would you like? Small, Medium, or Large?',
 
-				'HELP_MSG' : 'To play the game I will ask you if it is for a boy or girl, then what size of flower you would like, from there \
-        the game will begin.',
+				'HELP_MSG' : 'To play the game ask me if he or she loves me.',
 
 				'SIMPLE_REPROMPT' : "Would you like to play?",
 				'SHUTDOWN_MSG' : 'Thank you for playing..'

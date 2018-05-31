@@ -26,19 +26,75 @@ const handlers = {
     this.response.speak(speechOutput).listen(reprompt);
     this.emit(':responseReady');
   },
-  'newFlowerIntent' :function() {
-    var self = this;
 
+  //This intent should handle all the requests for guys, I tried picking a manly flower name...
+  'carnationFlowerIntent' : function() {
+    var gender = this.event.request.intent.slots.maleGender.value;
+    /* Future error checking I suppose
+    if (true) {
+      this.response.speak("Okay, here we go.");
+    }
+    else {
+      this.response.speak("That isn't a male gender word, try again.");
+    }
+    */
+    var speechOutput = heLoves;
+    this.response.speak(speechOutput);
+    this.emit(':responseReady');
+  },
+
+  'daisyFlowerIntent' : function() {
+    var gender = this.event.request.intent.slots.femaleGender.value;
+    /* Future error checking I suppose
+    if (true) {
+      this.response.speak("Okay, here we go.");
+    }
+    else {
+      this.response.speak("That isn't a female gender word, try again.");
+    }
+    */
+    var speechOutput = sheLoves;
+    this.response.speak(speechOutput);
+    this.emit(':responseReady');
+  },
+
+  'AMAZON.FallbackIntent' : function(){
+    this.response.speak("I don't quite know how to help with that in this skill. Try something else.")
+    this.emit(':responseReady')
+  },
+
+  'AMAZON.CancelIntent': function () {
+    this.response.speak(this.t('STOPING'));
+    this.emit('SessionEndedRequest');
   },
 
   'AMAZON.CancelIntent' : function() {
-    var self = this;
-    closeWithSpeech(self);
+    this.response.speak('SHUTDOWN_MSG');
+    this.emit(':responseReady');
   },
 
-  'AMAZON.StopIntent' : function() {
-    var self = this;
-    closeWithSpeech(self);
+  'AMAZON.HelpIntent' : function() {
+    const speechOutput = this.t('HELP_MSG');
+    const reprompt = this.t('HELP_REPROMPT');
+    this.response.speak(speechOutput).listen('HELP_REPROMPT');
+    this.emit(':responseReady');
+  }
+
+  'AMAZON.StopIntent': function() {
+    this.response.speak('Ok, let\'s play again soon.');
+    this.emit(':responseReady');
+  },
+
+  'SessionEndedRequest': function () {
+    this.response.speak(this.t('SHUTDOWN_MSG'));
+    this.emit(':responseReady');
+  },
+
+  'Unhandled': function () {
+    this.attributes.speechOutput = this.t('HELP_MESSAGE');
+    this.attributes.repromptSpeech = this.t('HELP_REPROMPT');
+    this.response.speak(this.attributes.speechOutput).listen(this.attributes.repromptSpeech);
+    this.emit(':responseReady');
   },
 
 }
@@ -59,52 +115,7 @@ exports.handler = function(event, context) {
 	alexa.registerHandlers(handlers);
   // Start the Alexa code
 	alexa.execute();
-},
-
-//This intent should handle all the requests for guys, I tried picking a manly flower name...
-'carnationFlowerIntent' : function() {
-  var gender = this.event.request.intent.slots.maleGender.value;
-  /* Future error checking I suppose
-  if (true) {
-    this.response.speak("Okay, here we go.");
-  }
-  else {
-    this.response.speak("That isn't a male gender word, try again.");
-  }
-  */
-  var speechOutput = heLoves;
-  this.response.speak(speechOutput);
-  this.emit(':responseReady');
-},
-
-'daisyFlowerIntent' : function() {
-  var gender = this.event.request.intent.slots.femaleGender.value;
-  /* Future error checking I suppose
-  if (true) {
-    this.response.speak("Okay, here we go.");
-  }
-  else {
-    this.response.speak("That isn't a female gender word, try again.");
-  }
-  */
-  var speechOutput = sheLoves;
-  this.response.speak(speechOutput);
-  this.emit(':responseReady');
-},
-'AMAZON.CancelIntent': function () {
-    this.response.speak(this.t('STOPING'));
-    this.emit('SessionEndedRequest');
-},
-'SessionEndedRequest': function () {
-    this.response.speak(this.t('STOP_MESSAGE'));
-    this.emit(':responseReady');
-},
-'Unhandled': function () {
-    this.attributes.speechOutput = this.t('HELP_MESSAGE');
-    this.attributes.repromptSpeech = this.t('HELP_REPROMPT');
-    this.response.speak(this.attributes.speechOutput).listen(this.attributes.repromptSpeech);
-    this.emit(':responseReady');
-},
+}
 
 //////////////////////////////////////////////////////////////////////////////
 // Intent implementation functions
