@@ -4,6 +4,7 @@ petals off a flower to determine if the the admirer of the user truly loves them
 'use strict';
 
 // Include the Alexa SDK
+console.log("Hello, world!");
 const Alexa = require('alexa-sdk');
 const languageStrings = require('./languageStrings').languageStrings;
 
@@ -19,7 +20,7 @@ const handlers = {
   //LaunchRequest is what will run first when the skill is invoked
   'LaunchRequest' : function() {
     //The phrase that Alexa will say upon starting the skill
-    this.response.speak('WELCOME_MSG').listen("WELCOME_REPROMPT");
+    this.response.speak(this.t('WELCOME_MSG')).listen(this.t("WELCOME_REPROMPT"));
     this.emit(':responseReady')
   },
 
@@ -62,24 +63,19 @@ const handlers = {
   },
 
   'AMAZON.CancelIntent': function () {
-    this.response.speak(this.t('STOPING'));
+    this.response.speak(this.t('SHUTDOWN_MSG'));
     this.emit('SessionEndedRequest');
-  },
-
-  'AMAZON.CancelIntent' : function() {
-    this.response.speak('SHUTDOWN_MSG');
-    this.emit(':responseReady');
   },
 
   'AMAZON.HelpIntent' : function() {
     const speechOutput = this.t('HELP_MSG');
     const reprompt = this.t('HELP_REPROMPT');
-    this.response.speak(speechOutput).listen('HELP_REPROMPT');
+    this.response.speak(speechOutput).listen(this.t('HELP_REPROMPT'));
     this.emit(':responseReady');
-  }
+  },
 
-  'AMAZON.StopIntent': function() {
-    this.response.speak('Ok, let\'s play again soon.');
+  'AMAZON.StopIntent' : function() {
+    this.response.speak(this.t('STOP_MSG'));
     this.emit(':responseReady');
   },
 
@@ -107,6 +103,7 @@ exports.handler = function(event, context) {
 
 	// configure alexa
 	alexa.appId = APP_ID;
+  //Include the languageStrings library
 	alexa.resources = languageStrings;
 
 	// register alexa function handlers and away we go!
@@ -119,6 +116,7 @@ exports.handler = function(event, context) {
 // Intent implementation functions
 //////////////////////////////////////////////////////////////////////////////
 
+//Function for the ladies
 function sheLoves(){
   // var smFlower = Math.floor(Math.random() * ((5 - 3 ) + 1) + 3); //make a small flower with petals from 3 to 5
   // var mdFlower = Math.floor(Math.random() * ((7 - 5) + 1) + 5); //make a medium flower with petals from 5 to 7
@@ -150,10 +148,11 @@ function sheLoves(){
     var theLoveArray = loveArray.toString();  //Change the array of love to a single string
     const speechOutput = theLoveArray;  //Print the Array
 
-    // self.response.speak(speechOutput);
-	  // self.emit(':responseReady');
+    return speechOutput;  //Return the speechOutput for alexa to say it
+
 }
 
+//Function for the fellas
 function heLoves(){
   // var smFlower = Math.floor(Math.random() * ((5 - 3 ) + 1) + 3); //make a small flower with petals from 3 to 5
   // var mdFlower = Math.floor(Math.random() * ((7 - 5) + 1) + 5); //make a medium flower with petals from 5 to 7
@@ -166,7 +165,7 @@ function heLoves(){
 
   // this.response.listen('SIZE_PROMPT')  TODO:implementation will come later...
 
-  var flowerSize = Math.floor(Math.random() * ((9 - 1) + 1) + 1); //make a large flower with petals from 7 to 9
+  var flowerSize = Math.floor(Math.random() * ((9 - 1) + 1) + 1); //make a large flower with petals from 1 to 9
 
   var phraseA = 'He Loves Me'
   var phraseB = 'He Loves Me Not'
@@ -185,8 +184,8 @@ function heLoves(){
     var theLoveArray = loveArray.toString();  //Change the array of love to a single string
     const speechOutput = theLoveArray;  //Print the Array
 
-    //self.response.speak(speechOutput);
-	  //self.emit(':responseReady');
+    return speechOutput;  //Return the speechOutput for alexa to say it
+
 }
 
 function closeWithSpeech(self) {
