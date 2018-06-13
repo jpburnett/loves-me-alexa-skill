@@ -3,7 +3,7 @@ module.exports = {
 		'en' : {
 			'translation' : {
 				'SKILL_NAME' : 'Loves me',
-				'WELCOME_MSG' : 'Welcome to Loves me, to play just ask me does he or she loves me.',
+				'WELCOME_MSG' : 'Welcome to Loves me, to play, simply ask me does he or she loves me.',
 				'WELCOME_REPROMPT' : 'lets play to see if your admirer loves you, or loves you not.',
 				'SIZE_PROMPT' : 'What size of flower would you like? Small, Medium, or Large?',
 				'HELP_MSG' : 'To play the game ask me if he or she loves me.',
@@ -15,7 +15,7 @@ module.exports = {
 		'en-US' : {
 			'translation' : {
 				'SKILL_NAME' : 'Loves Me',
-				'WELCOME_MSG' : 'Welcome to Loves me, to play just ask me does he or she loves me.',
+				'WELCOME_MSG' : 'Welcome to Loves me, to play simply ask, me does he or she love me.',
 				'WELCOME_REPROMPT' : 'Welcome to loves me, lets play to see if your admirer loves you, or loves you not.',
 				'SIZE_PROMPT' : 'What size of flower would you like? Small, Medium, or Large?',
 				'HELP_MSG' : 'To play the game ask me if he or she loves me.',

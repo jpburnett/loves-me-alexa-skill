@@ -1,0 +1,7 @@
+
+#ignore files
+node_modules/
+main.js
+*.json
+.DS_Store
+alexasim
