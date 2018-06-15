@@ -36,48 +36,58 @@ const handlers = {
       this.response.speak("That isn't a male gender word, try again.");
     }
     */
-   var flowerSize = Math.floor(Math.random() * ((5 - 1) + 1)); //make a large flower with petals from 1 to 5
-   var theLoveArray = sheLoves(flowerSize);  //Make theLoveArray filled with strings
-   var finalIndex = flowerSize - 1;  //Get the size of the flower and subtract one for size of theLoveArray
+   var size = Math.floor(Math.random() * (6 - 1) + 1); //make a large flower with petals from 1 to 5
+   console.log("the flower size is: " + size);
+   var theLoveArray = heLoves(size);  //Make theLoveArray filled with strings
+   var finalIndex = size - 1;  //Get the size of the flower and subtract one for size of theLoveArray
    var finalPhrase = theLoveArray[finalIndex]; //Get the last value of the index in theLoveArray
+   console.log(theLoveArray);
+   console.log("the flower size is NOW: " + size);
+   console.log("the final index is: " + finalIndex);
+   console.log("the final phrase is: " + finalPhrase);
 
+   
    //TODO: FIX OUTPUT SPEECH
-   var initialSpeechOutput = theLoveArray.toString();
+   theLoveArray = theLoveArray.join(', '); //Add a space in the array for Alexa to sound more natural
+   var initialSpeechOutput = theLoveArray.toString(); //Change the array to a string
    self.response.speak(initialSpeechOutput) //Alexa will say the whole Love Array
-   if (finalPhrase == "Loves Me") {
-    self.response.speak("Congrats, the person, " + finalPhrase)
-  } else {
-    self.response.speak("Ooooh...sorry the person " + finalPhrase)
-  }
+   if (finalPhrase == "He Loves Me") {
+     self.response.speak("Congrats, " + finalPhrase);
+    } else {
+      self.response.speak('<amazon:effect name="whispered"> Ooooh...sorry </amazon:effect>' + finalPhrase);
+    }
    self.emit(':responseReady');
   },
 
   //This is the intent for the girl requests, a more girly flower name...kinda...
   'daisyFlowerIntent' : function() {
     var self = this;
-    /* var gender = this.event.request.intent.slots.femaleGender.value;
+    /* var gender = this.event.request.intent.slots.maleGender.value;
     Future error checking I suppose
     if (true) {
       this.response.speak("Okay, here we go.");
     }
     else {
-      this.response.speak("That isn't a female gender word, try again.");
+      this.response.speak("That isn't a male gender word, try again.");
     }
     */
-    var flowerSize = Math.floor(Math.random() * ((6 - 1) + 1)); //make a large flower with petals from 1 to 6
-    var theLoveArray = sheLoves(flowerSize);  //Make theLoveArray filled with strings
-    var finalIndex = flowerSize - 1;  //Get the size of the flower and subtract one for size of theLoveArray
-    var finalPhrase = theLoveArray[finalIndex]; //Get the last value of the index in theLoveArray
+   var size = Math.floor(Math.random() * (6 - 1) + 1); //make a large flower with petals from 1 to 5
+   console.log("the flower size is: " + size);
+   var theLoveArray = heLoves(size);  //Make theLoveArray filled with strings
+   var finalIndex = size - 1;  //Get the size of the flower and subtract one for size of theLoveArray
+   var finalPhrase = theLoveArray[finalIndex]; //Get the last value of the index in theLoveArray
+   
+   //TODO: FIX OUTPUT SPEECH
+   theLoveArray = theLoveArray.join(', '); //Add a space in the array for Alexa to sound more natural
+   var initialSpeechOutput = theLoveArray.toString(); //Change the array to a string
+   self.response.speak(initialSpeechOutput) //Alexa will say the whole Love Array
 
-     //TODO: FIX OUTPUT SPEECH
-     var initialSpeechOutput = theLoveArray.toString();
-     self.response.speak(initialSpeechOutput) //Alexa will say the whole Love Array
-     if (finalPhrase == "Loves Me") {
-      self.response.speak("Congrats, the person, " + finalPhrase)
+   if (finalPhrase == "She Loves Me") {
+     self.response.speak("Congrats, " + finalPhrase);
     } else {
-      self.response.speak("Ooooh...sorry the person " + finalPhrase)
+      self.response.speak('<emphasis level="strong" >Ooooh...sorry </emphasis>' + finalPhrase);
     }
-     self.emit(':responseReady');
+   self.emit(':responseReady');
   },
 
   'AMAZON.FallbackIntent' : function(){
@@ -171,14 +181,13 @@ function sheLoves(flowerSize){
     }
     // var theLoveArray = loveArray.toString();  //Change the array of love to a single string
     // const speechOutput = theLoveArray;  //Print the Array
-    loveArray = loveArray.join(', '); //Add a space in the array for Alexa to sound more natural
 
     return loveArray;  //Return the loveArray to parse through later.
 
 }
 
 //Function for the fellas
-function heLoves(){
+function heLoves(flowerSize){
   // var smFlower = Math.floor(Math.random() * ((5 - 3 ) + 1) + 3); //make a small flower with petals from 3 to 5
   // var mdFlower = Math.floor(Math.random() * ((7 - 5) + 1) + 5); //make a medium flower with petals from 5 to 7
   // var lgFlower = Math.floor(Math.random() * ((9 - 7) + 1) + 7); //make a large flower with petals from 7 to 9
@@ -189,8 +198,6 @@ function heLoves(){
   var loveArray = []; //Array that will get filled with the phrases to speak
 
   // this.response.listen('SIZE_PROMPT')  TODO:implementation will come later...
-
-  var flowerSize = Math.floor(Math.random() * ((9 - 1) + 1) + 1); //make a large flower with petals from 1 to 9
 
   var phraseA = 'He Loves Me'
   var phraseB = 'He Loves Me Not'
@@ -208,7 +215,6 @@ function heLoves(){
     }
     // var theLoveArray = loveArray.toString();  //Change the array of love to a single string
     // const speechOutput = theLoveArray;  //Print the Array
-    loveArray = loveArray.join(', '); //Add a space in the array for Alexa to sound more natural
 
     return loveArray;  //Return the loveArray to parse through later.
 
