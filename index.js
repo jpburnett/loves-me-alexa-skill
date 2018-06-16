@@ -49,12 +49,13 @@ const handlers = {
    
    //TODO: FIX OUTPUT SPEECH
    theLoveArray = theLoveArray.join(', '); //Add a space in the array for Alexa to sound more natural
-   var initialSpeechOutput = theLoveArray.toString(); //Change the array to a string
-   self.response.speak(initialSpeechOutput) //Alexa will say the whole Love Array
+   var initialSpeechOutput = theLoveArray.toString(); //Change the array to a string, Alexa will say the whole Love Array
+
    if (finalPhrase == "He Loves Me") {
-     self.response.speak("Congrats, " + finalPhrase);
+     var finalSpeachOutputA = initialSpeechOutput + `<break time="1s"/>, Congratulations! He loves you!`;
+     self.response.speak(finalSpeachOutputA);
     } else {
-      self.response.speak('<amazon:effect name="whispered"> Ooooh...sorry </amazon:effect>' + finalPhrase);
+      self.response.speak('<amazon:effect name="whispered"> Oooooooooooh...sorry, </amazon:effect>'+`<break time="1s"/>` + finalPhrase );
     }
    self.emit(':responseReady');
   },
@@ -73,20 +74,21 @@ const handlers = {
     */
    var size = Math.floor(Math.random() * (6 - 1) + 1); //make a large flower with petals from 1 to 5
    console.log("the flower size is: " + size);
-   var theLoveArray = heLoves(size);  //Make theLoveArray filled with strings
+   var theLoveArray = sheLoves(size);  //Make theLoveArray filled with strings
    var finalIndex = size - 1;  //Get the size of the flower and subtract one for size of theLoveArray
    var finalPhrase = theLoveArray[finalIndex]; //Get the last value of the index in theLoveArray
    
    //TODO: FIX OUTPUT SPEECH
    theLoveArray = theLoveArray.join(', '); //Add a space in the array for Alexa to sound more natural
-   var initialSpeechOutput = theLoveArray.toString(); //Change the array to a string
-   self.response.speak(initialSpeechOutput) //Alexa will say the whole Love Array
+   var initialSpeechOutput = theLoveArray.toString(); //Change the array to a string, Alexa will say the whole Love Array
 
    if (finalPhrase == "She Loves Me") {
-     self.response.speak("Congrats, " + finalPhrase);
-    } else {
-      self.response.speak('<emphasis level="strong" >Ooooh...sorry </emphasis>' + finalPhrase);
-    }
+    var finalSpeachOutputA = initialSpeechOutput + `<break time="1s"/>, Congratulations! She loves you!`;
+    self.response.speak(finalSpeachOutputA);
+   } else {
+     self.response.speak('<emphasis level="strong"> Oooooooooooh...sorry, </emphasis>'+`<break time="1s"/>` + finalPhrase);
+   }
+  self.emit(':responseReady');
    self.emit(':responseReady');
   },
 
