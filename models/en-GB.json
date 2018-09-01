@@ -1,0 +1,142 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "loves me",
+      "intents": [
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "carnationFlowerIntent",
+          "slots": [
+            {
+              "name": "maleGender",
+              "type": "maleGender"
+            }
+          ],
+          "samples": [
+            "{maleGender} loves me",
+            "what does {maleGender} think of me",
+            "does {maleGender} like me",
+            "does {maleGender} love me"
+          ]
+        },
+        {
+          "name": "daisyFlowerIntent",
+          "slots": [
+            {
+              "name": "femaleGender",
+              "type": "femaleGender"
+            }
+          ],
+          "samples": [
+            "{femaleGender} loves me",
+            "what does {femaleGender} think of me",
+            "does {femaleGender} love me",
+            "does {femaleGender} like me"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "values": [
+            {
+              "name": {
+                "value": "she"
+              }
+            },
+            {
+              "name": {
+                "value": "female"
+              }
+            },
+            {
+              "name": {
+                "value": "chick"
+              }
+            },
+            {
+              "name": {
+                "value": "woman"
+              }
+            },
+            {
+              "name": {
+                "value": "lady"
+              }
+            },
+            {
+              "name": {
+                "value": "girl"
+              }
+            }
+          ],
+          "name": "femaleGender"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "male"
+              }
+            },
+            {
+              "name": {
+                "value": "guy"
+              }
+            },
+            {
+              "name": {
+                "value": "man"
+              }
+            },
+            {
+              "name": {
+                "value": "dude"
+              }
+            },
+            {
+              "name": {
+                "value": "he"
+              }
+            }
+          ],
+          "name": "maleGender"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "large"
+              }
+            },
+            {
+              "name": {
+                "value": "medium"
+              }
+            },
+            {
+              "name": {
+                "value": "small"
+              }
+            }
+          ],
+          "name": "flowerSize"
+        }
+      ]
+    }
+  }
+}

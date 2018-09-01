@@ -1,7 +1,9 @@
-
-#ignore files
-node_modules/
-main.js
-*.json
+#Ignore files
 .DS_Store
-alexasim
+/lambda/custom/node_modules
+test/
+.ask
+skill.json
+.ask/config
+
+
