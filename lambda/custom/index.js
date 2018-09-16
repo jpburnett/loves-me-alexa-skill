@@ -31,6 +31,87 @@ const LaunchRequestHandler = {
     },
 };
 
+// this will be the part that will dialog delegate to get the flower size
+const InProgressGetFlower = {
+    canHandle(handlerInput) {
+        const request = handlerInput.requestEnvelope.request;
+
+        return request.type === 'IntentRequest'
+            && request.intent.name === 'getFlowerIntent'
+            && request.dialogState !== 'COMPLETED';
+    },
+    handle(handlerInput) {
+        const currentIntent = handlerInput.requestEnvelope.request.intent;
+        let prompt = '';
+
+        for (const slotName in currentIntent.slots) {
+            if (Object.prototype.hasOwnProperty.call(currentIntent.slots, slotName)) {
+                const currentSlot = currentIntent.slots[slotName];
+                if (currentSlot.confirmationStatus !== 'CONFIRMED'
+                    && currentSlot.resolutions
+                    && currentSlot.resolutions.resolutionsPerAuthority[0]) {
+                    if (currentSlot.resolutions.resolutionsPerAuthority[0].status.code === 'ER_SUCCESS_MATCH') {
+                        if (currentSlot.resolutions.resolutionsPerAuthority[0].values.length > 1) {
+                            prompt = 'Which would you like';
+                            const size = currentSlot.resolutions.resolutionsPerAuthority[0].values.length;
+
+                            currentSlot.resolutions.resolutionsPerAuthority[0].values
+                                .forEach((element, index) => {
+                                    prompt += ` ${(index === size - 1) ? ' or' : ' '} ${element.value.name}`;
+                                });
+
+                            prompt += '?';
+
+                            return handlerInput.responseBuilder
+                                .speak(prompt)
+                                .reprompt(prompt)
+                                .addElicitSlotDirective(currentSlot.name)
+                                .getResponse();
+                        }
+                    } else if (currentSlot.resolutions.resolutionsPerAuthority[0].status.code === 'ER_SUCCESS_NO_MATCH') {
+                        if (requiredSlots.indexOf(currentSlot.name) > -1) {
+                            prompt = `What ${currentSlot.name} are you looking for`;
+
+                            return handlerInput.responseBuilder
+                                .speak(prompt)
+                                .reprompt(prompt)
+                                .addElicitSlotDirective(currentSlot.name)
+                                .getResponse();
+                        }
+                    }
+                }
+            }
+        }
+
+        return handlerInput.responseBuilder
+            .addDelegateDirective(currentIntent)
+            .getResponse();
+    },
+
+}
+
+const completeGetFlower = {
+    canHandle(handlerInput) {
+        const request = handlerInput.requestEnvelope.request;
+
+        return request.type === 'IntentRequest'
+            && request.intent.name === 'getFlowerIntent'
+            && request.dialogState === 'COMPLETED';
+    },
+
+    handle(handlerInput) {
+        // The values of all the filled slots
+        const filledSlots = handlerInput.requestEnvelope.request.intent.slots;
+
+        // get the slots that should have been previously filled.
+        const slotValues = getSlotValues(filledSlots);
+
+        // Empty for now, I will add on to it
+        let speechOutput = '';
+
+    }
+
+};
 
 
 // Help the User make informed decisions of how to use the skill
@@ -123,6 +204,50 @@ const SessionEndedHandler = {
 //////////////////////////////////////////////////////////////////////////////
 // Helper Functions
 //////////////////////////////////////////////////////////////////////////////
+
+// getSlotValues will get what items were filled in slots
+function getSlotValues(filledSlots) {
+    const slotValues = {};
+
+    console.log(`The filled slots: ${JSON.stringify(filledSlots)}`);
+    Object.keys(filledSlots).forEach((item) => {
+        const name = filledSlots[item].name;
+
+        if (filledSlots[item] &&
+            filledSlots[item].resolutions &&
+            filledSlots[item].resolutions.resolutionsPerAuthority[0] &&
+            filledSlots[item].resolutions.resolutionsPerAuthority[0].status &&
+            filledSlots[item].resolutions.resolutionsPerAuthority[0].status.code) {
+            switch (filledSlots[item].resolutions.resolutionsPerAuthority[0].status.code) {
+                case 'ER_SUCCESS_MATCH':
+                    slotValues[name] = {
+                        synonym: filledSlots[item].value,
+                        resolved: filledSlots[item].resolutions.resolutionsPerAuthority[0].values[0].value.name,
+                        isValidated: true,
+                    };
+                    break;
+                case 'ER_SUCCESS_NO_MATCH':
+                    slotValues[name] = {
+                        synonym: filledSlots[item].value,
+                        resolved: filledSlots[item].value,
+                        isValidated: false,
+                    };
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            slotValues[name] = {
+                synonym: filledSlots[item].value,
+                resolved: filledSlots[item].value,
+                isValidated: false,
+            };
+        }
+    }, this);
+
+    return slotValues;
+}
+
 //Function for the ladies
 function sheLoves(flowerSize) {
     // var smFlower = Math.floor(Math.random() * ((5 - 3 ) + 1) + 3); //make a small flower with petals from 3 to 5
@@ -203,9 +328,11 @@ exports.handler = skillBuilder
         LaunchRequestHandler,
         HelpHandler,
         StopHandler,
+        InProgressGetFlower,
+        completeGetFlower,
         FallbackHandler,
         ErrorHandler,
-        SessionEndedRequestHandler
+        SessionEndedHandler
     )
     .addRequestInterceptors(LocalizationInterceptor)
     .addErrorHandlers(ErrorHandler)
