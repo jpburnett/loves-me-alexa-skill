@@ -250,19 +250,11 @@ function getSlotValues(filledSlots) {
 
 //Function for the ladies
 function sheLoves(flowerSize) {
-    // var smFlower = Math.floor(Math.random() * ((5 - 3 ) + 1) + 3); //make a small flower with petals from 3 to 5
-    // var mdFlower = Math.floor(Math.random() * ((7 - 5) + 1) + 5); //make a medium flower with petals from 5 to 7
-    // var lgFlower = Math.floor(Math.random() * ((9 - 7) + 1) + 7); //make a large flower with petals from 7 to 9
 
     var lovesMeCounter = 0; //counter to determine how many times to print the phrase "Loves Me" starts at 0
     var LovesMeNotCounter = 1;  //counter to determine how many times to print the phrase "Loves Me Not" starts at 1
 
     var loveArray = []; //Array that will get filled with the phrases to speak
-
-    // this.response.listen('SIZE_PROMPT')  TODO:implementation will come later...
-
-    //Don't use this here, I will just pass it in to the function
-    // var flowerSize = Math.floor(Math.random() * ((9 - 1) + 1) + 1); //make a large flower with petals from 7 to 9
 
     var phraseA = 'She Loves Me'
     var phraseB = 'She Loves Me Not'
@@ -294,8 +286,6 @@ function heLoves(flowerSize) {
     var LovesMeNotCounter = 1;  //counter to determine how many times to print the phrase "Loves Me Not" starts at 1
 
     var loveArray = []; //Array that will get filled with the phrases to speak
-
-    // this.response.listen('SIZE_PROMPT')  TODO:implementation will come later...
 
     var phraseA = 'He Loves Me'
     var phraseB = 'He Loves Me Not'
