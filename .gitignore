@@ -1,7 +1,17 @@
-#Ignore files
+# if im on my mac
 .DS_Store
-/lambda/custom/node_modules
-test/
-.ask
+
+#Secret AWS Stuff
+skill-package
+infrastructure
+ask-resources.json
 skill.json
-.ask/config
+.ask
+
+# all the node modules
+skill_env
+skill_env.zip
+
+# random things that pop up when I test
+test
+**/__pycache__
