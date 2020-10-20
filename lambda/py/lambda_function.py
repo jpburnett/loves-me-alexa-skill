@@ -1,15 +1,15 @@
 """
 lambda_function deals with the launch handler and the skill building.
 """
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 # Python Libraries
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 import logging
 import gettext
 
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 # AwS Libraries
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 from ask_sdk_core.skill_builder import SkillBuilder
 from ask_sdk_core.handler_input import HandlerInput
 from ask_sdk_core.dispatch_components import (
@@ -19,21 +19,23 @@ from ask_sdk_core.utils import is_request_type, is_intent_name
 from ask_sdk_model.ui import SimpleCard
 from ask_sdk_model import Response
 
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 # Resource Libraries
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 from skill.resources import data
 from skill.intents.built_in_intenets import HelpIntentHandler, CancelOrStopIntentHandler, RepeatIntentHandler, \
     FallbackIntentHandler, SessionEndedRequestHandler, YesIntentHandler, NoIntentHandler, \
     CatchAllExceptionHandler, CacheSpeechForRepeatInterceptor, LocalizationInterceptor
 
-# Set Logging 
+# Set Logging
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 # Handlers
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
+
+
 class LaunchRequestHandler(AbstractRequestHandler):
     """
     Handler for skill launch.
@@ -41,6 +43,7 @@ class LaunchRequestHandler(AbstractRequestHandler):
     AbstractRequestHandler (obj): Amazon Request Handler object
     Returns: Amazon response object
     """
+
     def can_handle(self, handler_input):
         # type: (HandlerInput) -> bool
         return is_request_type("LaunchRequest")(handler_input)
@@ -54,14 +57,12 @@ class LaunchRequestHandler(AbstractRequestHandler):
         session_attr = handler_input.attributes_manager.session_attributes
         session_attr["PREV_INTENT"] = "LaunchRequest"
 
-        item = util.get_random_item()
-        speech = _(data.WELCOME_MSG).format(
-            _(data.SKILL_NAME), item)
+        speech = _(data.WELCOME_MSG).format(_(data.SKILL_NAME))
 
         reprompt = _(data.WELCOME_REPROMPT)
 
         handler_input.response_builder.speak(speech).set_card(
-            SimpleCard(data.SKILL_NAME, "Terraria Tool")
+            SimpleCard(data.SKILL_NAME, "Loves Me")
         ).ask(reprompt)
 
         return handler_input.response_builder.response
